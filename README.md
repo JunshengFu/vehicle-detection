@@ -101,7 +101,7 @@ Here is an example using the `RGB` color space and HOG parameters of `orientatio
 To optimize the HoG extraction, I **extract the HoG feature for the entire image only once**. Then the entire HoG image
 is saved for further processing. (see line 319 to 321 in  `svn_pipeline.py`)
 
-####1.2 Final choices of HOG parameters, Spatial Features and Histogram of Color.
+#### 1.2 Final choices of HOG parameters, Spatial Features and Histogram of Color.
 
 I tried various combinations of parameters and choose the final combination as follows 
 (see line 16-27 in `svn_pipeline.py`):
@@ -184,7 +184,7 @@ Since the "car" is known to YOLO, I use the precomputed weights directly and app
 
 ---
 
-### Discussionpr
+### Discussion
 For the SVN based approach, the accuray is good, but the speed (2 fps) is an problem due to the fact of sliding window approach 
 is time consuming! We could use image downsampling, multi-threads, or GPU processing to improve the speed. But, there are probably
 a lot engineering work need to be done to make it running real-time. Also, in this application, I limit the vertical searching 
