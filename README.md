@@ -5,18 +5,18 @@
 #### A demo of Vehicle Detection System: a monocular camera is used for detecting vehicles. 
 
 
-####[**(1) Highway Drive (with Lane Departure Warning)**](https://youtu.be/Brh9-uab7Qs) 
+#### [**(1) Highway Drive (with Lane Departure Warning)**](https://youtu.be/Brh9-uab7Qs) 
 
 [![gif_demo1][demo1_gif]](https://youtu.be/Brh9-uab7Qs)
 
-####[**(2) City Drive (Vehicle Detection only)**](https://youtu.be/2wOxK86LcaM) 
+#### [**(2) City Drive (Vehicle Detection only)**](https://youtu.be/2wOxK86LcaM) 
 [![gif_demo2][demo2_gif]](https://youtu.be/2wOxK86LcaM)
 
 ---
 
-###Code & Files
+### Code & Files
 
-####1. My project includes the following files
+#### 1. My project includes the following files
 * [main.py](main.py) is the main code for demos
 * [svn_pipeline.py](svn_pipeline.py) is the car detection pipeline with SVN
 * [yolo_pipeline.py](svn_pipeline.py) is the car detection pipeline with a deep net [YOLO (You Only Look Once)](https://arxiv.org/pdf/1506.02640.pdf)
@@ -29,14 +29,14 @@ Others are the same as in the repository of [Lane Departure Warning System](http
 * [examples](examples) folder contains the sample images and videos
 
 
-####2. Dependencies & my environment
+#### 2. Dependencies & my environment
 
 Anaconda is used for managing my [**dependencies**](https://github.com/udacity/CarND-Term1-Starter-Kit).
 
 * OpenCV3, Python3.5, tensorflow, CUDA8  
 * OS: Ubuntu 16.04 (should work on other platform too)
 
-####3. How to run the code
+#### 3. How to run the code
 
 (1) Download weights for YOLO
 
@@ -79,7 +79,7 @@ python main.py
 [demo1_gif]: ./examples/demo1.gif
 [demo2_gif]: ./examples/demo2.gif
 
-####1.1 Extract Histogram of Oriented Gradients (HOG) from training images
+#### 1.1 Extract Histogram of Oriented Gradients (HOG) from training images
 The code for this step is contained in the function named `extract_features` and codes from line 464 to 552 in `svn_pipeline.py`. 
  If the SVN classifier exist, load it directly. 
  
@@ -118,11 +118,11 @@ I tried various combinations of parameters and choose the final combination as f
 
 All the features are **normalized** by line 511 to 513 in `svn_pipeline.py`, which is a critical step. Otherwise, classifier 
 may have some bias toward to the features with higher weights.
-####1.3. How to train a classifier
+#### 1.3. How to train a classifier
 I randomly select 20% of images for testing and others for training, and a linear SVN is used as classifier (see line
 520 to 531 in `svn_pipeline.py`)
 
-####1.4 Sliding Window Search
+#### 1.4 Sliding Window Search
 For this SVN-based approach, I use two scales of the search window (64x64 and 128x128, see line 41) and search only between 
 [400, 656] in y axis (see line 32 in `svn_pipeline.py`). I choose 75% overlap for the search windows in each scale (see 
 line 314 in `svn_pipeline.py`). 
@@ -132,7 +132,7 @@ line 361 to 366 in `svn_pipeline.py`). In the end, a list of windows contains de
 
 ![alt text][image3]
 
-####1.5 Create a heat map of detected vehicles
+#### 1.5 Create a heat map of detected vehicles
 After obtained a list of windows which may contain cars, a function named `generate_heatmap` (in line 565 in 
 `svn_pipeline.py`) is used to generate a heatmap. Then a threshold is used to filter out the false positives.
 
@@ -140,10 +140,10 @@ After obtained a list of windows which may contain cars, a function named `gener
 ![heatmap][image5]
 
 ####1.6 Image vs Video implementation
-**For image**, we could directly use the result from the filtered heatmap to create a bounding box of the detected 
+** For image**, we could directly use the result from the filtered heatmap to create a bounding box of the detected 
 vehicle. 
 
-**For video**, we could further utilize neighbouring frames to filter out the false positives, as well as to smooth 
+** For video**, we could further utilize neighbouring frames to filter out the false positives, as well as to smooth 
 the position of bounding box. 
 * Accumulate the heatmap for N previous frame.  
 * Apply weights to N previous frames: smaller weights for older frames (line 398 to 399 in `svn_pipeline.py`).
@@ -151,14 +151,14 @@ the position of bounding box.
 * I then assume each blob corresponded to a vehicle and constructe bounding boxes to cover the area of each blob detected.  
 
 
-####Example of test image
+#### Example of test image
 
 ![alt text][image7]
 
 ---
 
 
-###2. Neural Network Approach (YOLO)
+### 2. Neural Network Approach (YOLO)
 `yolo_pipeline.py` contains the code for the yolo pipeline. 
 
 [YOLO](https://arxiv.org/pdf/1506.02640.pdf) is an object detection pipeline baesd on Neural Network. Contrast to prior work on object detection with classifiers 
@@ -179,12 +179,12 @@ Steps to use the YOLO for detection:
 `yolo_pipeline.py` is modified and integrated based on this [tensorflow implementation of YOLO](https://github.com/gliese581gg/YOLO_tensorflow).
 Since the "car" is known to YOLO, I use the precomputed weights directly and apply to the entire input frame.
 
-####Example of test image
+#### Example of test image
 ![alt text][image8]
 
 ---
 
-###Discussionpr
+### Discussionpr
 For the SVN based approach, the accuray is good, but the speed (2 fps) is an problem due to the fact of sliding window approach 
 is time consuming! We could use image downsampling, multi-threads, or GPU processing to improve the speed. But, there are probably
 a lot engineering work need to be done to make it running real-time. Also, in this application, I limit the vertical searching 
