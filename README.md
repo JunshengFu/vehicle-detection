@@ -1,8 +1,8 @@
-#**Vehicle Detection for Autonomous Driving** 
+# **Vehicle Detection for Autonomous Driving** 
 
-##Objective
+## Objective
 
-####A demo of Vehicle Detection System: a monocular camera is used for detecting vehicles. 
+#### A demo of Vehicle Detection System: a monocular camera is used for detecting vehicles. 
 
 
 ####[**(1) Highway Drive (with Lane Departure Warning)**](https://youtu.be/Brh9-uab7Qs) 
@@ -49,9 +49,9 @@ python main.py
 ```
 ---
 
-###**Two approaches: Linear SVN vs Neural Network**
+### **Two approaches: Linear SVN vs Neural Network**
 
-###1. Linear SVN Approach
+### 1. Linear SVN Approach
 `svn_pipeline.py` contains the code for the svn pipeline.
 
 **Steps:**
