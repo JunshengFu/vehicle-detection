@@ -19,7 +19,7 @@
 #### 1. My project includes the following files
 * [main.py](main.py) is the main code for demos
 * [svn_pipeline.py](svn_pipeline.py) is the car detection pipeline with SVN
-* [yolo_pipeline.py](svn_pipeline.py) is the car detection pipeline with a deep net [YOLO (You Only Look Once)](https://arxiv.org/pdf/1506.02640.pdf)
+* [yolo_pipeline.py](yolo_pipeline.py) is the car detection pipeline with a deep net [YOLO (You Only Look Once)](https://arxiv.org/pdf/1506.02640.pdf)
 * [visualization.py](visualizations.py) is the function for adding visalization
 * [README.md](README.md) summarizing the results
 ---
