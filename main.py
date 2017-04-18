@@ -11,10 +11,10 @@ def pipeline_yolo(img):
 
     return output
 
-def pipeline_svn(img):
+def pipeline_svm(img):
 
     img_undist, img_lane_augmented, lane_info = lane_process(img)
-    output = vehicle_detection_svn(img_undist, img_lane_augmented, lane_info)
+    output = vehicle_detection_svm(img_undist, img_lane_augmented, lane_info)
 
     return output
 
@@ -33,11 +33,11 @@ if __name__ == "__main__":
         plt.imshow(yolo_result)
         plt.title('yolo pipeline', fontsize=30)
 
-        #(2) SVN pipeline
-        draw_img = pipeline_svn(image)
+        #(2) SVM pipeline
+        draw_img = pipeline_svm(image)
         fig = plt.figure()
         plt.imshow(draw_img)
-        plt.title('svn pipeline', fontsize=30)
+        plt.title('svm pipeline', fontsize=30)
         plt.show()
 
     elif demo == 2:
@@ -48,10 +48,10 @@ if __name__ == "__main__":
         clip.write_videofile(video_output, audio=False)
 
     else:
-        # SVN pipeline
+        # SVM pipeline
         video_output = 'examples/project_svn.mp4'
         clip1 = VideoFileClip("examples/project_video.mp4").subclip(30,32)
-        clip = clip1.fl_image(pipeline_svn)
+        clip = clip1.fl_image(pipeline_svm)
         clip.write_videofile(video_output, audio=False)
 
 
