@@ -18,7 +18,7 @@
 
 #### 1. My project includes the following files
 * [main.py](main.py) is the main code for demos
-* [svn_pipeline.py](svn_pipeline.py) is the car detection pipeline with SVN
+* [svm_pipeline.py](svm_pipeline.py) is the car detection pipeline with SVM
 * [yolo_pipeline.py](yolo_pipeline.py) is the car detection pipeline with a deep net [YOLO (You Only Look Once)](https://arxiv.org/pdf/1506.02640.pdf)
 * [visualization.py](visualizations.py) is the function for adding visalization
 * [README.md](README.md) summarizing the results
@@ -49,17 +49,17 @@ python main.py
 ```
 ---
 
-### **Two approaches: Linear SVN vs Neural Network**
+### **Two approaches: Linear SVM vs Neural Network**
 
-### 1. Linear SVN Approach
-`svn_pipeline.py` contains the code for the svn pipeline.
+### 1. Linear SVM Approach
+`svm_pipeline.py` contains the code for the svm pipeline.
 
 **Steps:**
 
 * Perform a Histogram of Oriented Gradients (HOG) feature extraction on a labeled training set of images and train a classifier Linear SVM classifier
 * A color transform is applied to the image and append binned color features, as well as histograms of color, to HOG feature vector. 
 * Normalize your features and randomize a selection for training and testing.
-* Implement a sliding-window technique and use SVN classifier to search for vehicles in images.
+* Implement a sliding-window technique and use SVM classifier to search for vehicles in images.
 * Run pipeline on a video stream and create a heat map of recurring detections frame by frame to reject outliers and follow detected vehicles.
 * Estimate a bounding box for detected vehicles.
 
@@ -80,8 +80,8 @@ python main.py
 [demo2_gif]: ./examples/demo2.gif
 
 #### 1.1 Extract Histogram of Oriented Gradients (HOG) from training images
-The code for this step is contained in the function named `extract_features` and codes from line 464 to 552 in `svn_pipeline.py`. 
- If the SVN classifier exist, load it directly. 
+The code for this step is contained in the function named `extract_features` and codes from line 464 to 552 in `svm_pipeline.py`. 
+ If the SVM classifier exist, load it directly. 
  
  Otherwise, I started by reading in all the `vehicle` and `non-vehicle` images, around 8000 images in each category.  These datasets are comprised of 
  images taken from the [GTI vehicle image database](http://www.gti.ssr.upm.es/data/Vehicle_database.html) and 
@@ -99,12 +99,12 @@ Here is an example using the `RGB` color space and HOG parameters of `orientatio
 ![alt text][image2-1]
  
 To optimize the HoG extraction, I **extract the HoG feature for the entire image only once**. Then the entire HoG image
-is saved for further processing. (see line 319 to 321 in  `svn_pipeline.py`)
+is saved for further processing. (see line 319 to 321 in  `svm_pipeline.py`)
 
 #### 1.2 Final choices of HOG parameters, Spatial Features and Histogram of Color.
 
 I tried various combinations of parameters and choose the final combination as follows 
-(see line 16-27 in `svn_pipeline.py`):
+(see line 16-27 in `svm_pipeline.py`):
 * `YCrCb` color space
 * orient = 9  # HOG orientations
 * pix_per_cell = 8 # HOG pixels per cell
@@ -116,25 +116,25 @@ I tried various combinations of parameters and choose the final combination as f
 * hist_feat = True # Histogram features on or off
 * hog_feat = True # HOG features on or off
 
-All the features are **normalized** by line 511 to 513 in `svn_pipeline.py`, which is a critical step. Otherwise, classifier 
+All the features are **normalized** by line 511 to 513 in `svm_pipeline.py`, which is a critical step. Otherwise, classifier 
 may have some bias toward to the features with higher weights.
 #### 1.3. How to train a classifier
-I randomly select 20% of images for testing and others for training, and a linear SVN is used as classifier (see line
-520 to 531 in `svn_pipeline.py`)
+I randomly select 20% of images for testing and others for training, and a linear SVM is used as classifier (see line
+520 to 531 in `svm_pipeline.py`)
 
 #### 1.4 Sliding Window Search
-For this SVN-based approach, I use two scales of the search window (64x64 and 128x128, see line 41) and search only between 
-[400, 656] in y axis (see line 32 in `svn_pipeline.py`). I choose 75% overlap for the search windows in each scale (see 
-line 314 in `svn_pipeline.py`). 
+For this SVM-based approach, I use two scales of the search window (64x64 and 128x128, see line 41) and search only between 
+[400, 656] in y axis (see line 32 in `svm_pipeline.py`). I choose 75% overlap for the search windows in each scale (see 
+line 314 in `svm_pipeline.py`). 
 
-For every window, the SVN classifier is used to predict whether it contains a car nor not. If yes, save this window (see 
-line 361 to 366 in `svn_pipeline.py`). In the end, a list of windows contains detected cars are obtianed.
+For every window, the SVM classifier is used to predict whether it contains a car nor not. If yes, save this window (see 
+line 361 to 366 in `svm_pipeline.py`). In the end, a list of windows contains detected cars are obtianed.
 
 ![alt text][image3]
 
 #### 1.5 Create a heat map of detected vehicles
 After obtained a list of windows which may contain cars, a function named `generate_heatmap` (in line 565 in 
-`svn_pipeline.py`) is used to generate a heatmap. Then a threshold is used to filter out the false positives.
+`svm_pipeline.py`) is used to generate a heatmap. Then a threshold is used to filter out the false positives.
 
 ![heatmap][image4]
 ![heatmap][image5]
@@ -146,7 +146,7 @@ vehicle.
 ** For video**, we could further utilize neighbouring frames to filter out the false positives, as well as to smooth 
 the position of bounding box. 
 * Accumulate the heatmap for N previous frame.  
-* Apply weights to N previous frames: smaller weights for older frames (line 398 to 399 in `svn_pipeline.py`).
+* Apply weights to N previous frames: smaller weights for older frames (line 398 to 399 in `svm_pipeline.py`).
 * I then apply threshold and use `scipy.ndimage.measurements.label()` to identify individual blobs in the heatmap.  
 * I then assume each blob corresponded to a vehicle and constructe bounding boxes to cover the area of each blob detected.  
 
@@ -185,7 +185,7 @@ Since the "car" is known to YOLO, I use the precomputed weights directly and app
 ---
 
 ### Discussion
-For the SVN based approach, the accuray is good, but the speed (2 fps) is an problem due to the fact of sliding window approach 
+For the SVM based approach, the accuray is good, but the speed (2 fps) is an problem due to the fact of sliding window approach 
 is time consuming! We could use image downsampling, multi-threads, or GPU processing to improve the speed. But, there are probably
 a lot engineering work need to be done to make it running real-time. Also, in this application, I limit the vertical searching 
 range to control the number of searching windows, as well as avoid some false positives (e.g. cars on the tree).
