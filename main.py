@@ -1,5 +1,5 @@
 from moviepy.editor import VideoFileClip
-from svn_pipeline import *
+from svm_pipeline import *
 from yolo_pipeline import *
 from lane import *
 
@@ -21,7 +21,7 @@ def pipeline_svm(img):
 
 if __name__ == "__main__":
 
-    demo = 3  # 1:image (YOLO and SVN), 2: video (YOLO Pipeline), 3: video (SVN pipeline)
+    demo = 1  # 1:image (YOLO and SVM), 2: video (YOLO Pipeline), 3: video (SVM pipeline)
 
     if demo == 1:
         filename = 'examples/test4.jpg'
@@ -49,7 +49,7 @@ if __name__ == "__main__":
 
     else:
         # SVM pipeline
-        video_output = 'examples/project_svn.mp4'
+        video_output = 'examples/project_svm.mp4'
         clip1 = VideoFileClip("examples/project_video.mp4").subclip(30,32)
         clip = clip1.fl_image(pipeline_svm)
         clip.write_videofile(video_output, audio=False)

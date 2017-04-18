@@ -221,7 +221,7 @@ def warper(img, M):
 ## fit the lane line
 def full_search(binary_warped, visualization=False):
 
-    histogram = np.sum(binary_warped[binary_warped.shape[0]/2:,:], axis=0)
+    histogram = np.sum(binary_warped[binary_warped.shape[0]//2:,:], axis=0)
     # Create an output image to draw on and  visualize the result
     out_img = np.dstack((binary_warped, binary_warped, binary_warped))*255
     out_img = out_img.astype('uint8')
@@ -462,7 +462,7 @@ def create_output_frame(offcenter, pts, undist_ori, fps, curvature, curve_direct
     color_warp = np.zeros_like(undist_ori).astype(np.uint8)
 
     # create a frame to hold every image
-    whole_frame = np.zeros((h*2.5,w*2.34, 3), dtype=np.uint8)
+    whole_frame = np.zeros((int(h*2.5), int(w*2.34), 3), dtype=np.uint8)
 
 
     if abs(offcenter) > threshold:  # car is offcenter more than 0.6 m
