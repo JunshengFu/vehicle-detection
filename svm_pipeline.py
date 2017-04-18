@@ -460,7 +460,7 @@ def get_fileNames(rootdir):
 
 
 
-# if svn classifer exist, load it; otherwise, compute the svn classifier
+# if svm classifer exist, load it; otherwise, compute the svm classifier
 if path.isfile(clf_path):
 
     print('loading existing classifier...')
@@ -552,7 +552,7 @@ else:
     print("Classifier is written into: {}".format(destnation))
 
 
-def vehicle_detection_svn(image, img_lane_augmented, lane_info):
+def vehicle_detection_svm(image, img_lane_augmented, lane_info):
 
     start = timer()
 
