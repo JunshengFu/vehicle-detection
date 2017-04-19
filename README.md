@@ -47,6 +47,17 @@ the [weights](weights) folder.
 ```sh
 python main.py
 ```
+
+#### 4. Release History
+
+* 0.1.1
+    * Fix two minor bugs and update the documents
+    * Date 18 April 2017
+
+* 0.1.0
+    * The first proper release
+    * Date 31 March 2017
+
 ---
 
 ### **Two approaches: Linear SVM vs Neural Network**
