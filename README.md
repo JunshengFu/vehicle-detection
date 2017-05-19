@@ -21,7 +21,7 @@
 * [svm_pipeline.py](svm_pipeline.py) is the car detection pipeline with SVM
 * [yolo_pipeline.py](yolo_pipeline.py) is the car detection pipeline with a deep net [YOLO (You Only Look Once)](https://arxiv.org/pdf/1506.02640.pdf)
 * [visualization.py](visualizations.py) is the function for adding visalization
-* [README.md](README.md) summarizing the results
+
 ---
 Others are the same as in the repository of [Lane Departure Warning System](https://github.com/JunshengFu/autonomous-driving-lane-departure-warning):
 * [calibration.py](calibration.py) contains the script to calibrate camera and save the calibration results
