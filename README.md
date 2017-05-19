@@ -150,11 +150,11 @@ After obtained a list of windows which may contain cars, a function named `gener
 ![heatmap][image4]
 ![heatmap][image5]
 
-####1.6 Image vs Video implementation
-** For image**, we could directly use the result from the filtered heatmap to create a bounding box of the detected 
+#### 1.6 Image vs Video implementation
+** For image **, we could directly use the result from the filtered heatmap to create a bounding box of the detected 
 vehicle. 
 
-** For video**, we could further utilize neighbouring frames to filter out the false positives, as well as to smooth 
+** For video **, we could further utilize neighbouring frames to filter out the false positives, as well as to smooth 
 the position of bounding box. 
 * Accumulate the heatmap for N previous frame.  
 * Apply weights to N previous frames: smaller weights for older frames (line 398 to 399 in `svm_pipeline.py`).
