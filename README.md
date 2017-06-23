@@ -17,6 +17,10 @@
 ### Code & Files
 
 #### 1. My project includes the following files
+
+(Note: the hyperlinks **only** works if you are on the homepage of this GitHub reop,
+and if you are viewing it in "github.io" you can be redirected by clicking the **View the Project on GitHub** on the top)
+
 * [main.py](main.py) is the main code for demos
 * [svm_pipeline.py](svm_pipeline.py) is the car detection pipeline with SVM
 * [yolo_pipeline.py](yolo_pipeline.py) is the car detection pipeline with a deep net [YOLO (You Only Look Once)](https://arxiv.org/pdf/1506.02640.pdf)
