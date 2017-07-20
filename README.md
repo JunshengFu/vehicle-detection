@@ -35,7 +35,7 @@ Others are the same as in the repository of [Lane Departure Warning System](http
 Anaconda is used for managing my [**dependencies**](https://github.com/udacity/CarND-Term1-Starter-Kit).
 
 * OpenCV3, Python3.5, tensorflow, CUDA8  
-* OS: Ubuntu 16.04 (should work on other platform too)
+* OS: Ubuntu 16.04
 
 #### 3. How to run the code
 
