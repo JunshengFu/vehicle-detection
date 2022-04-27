@@ -41,7 +41,7 @@ Anaconda is used for managing my [**dependencies**](https://github.com/udacity/C
 
 (1) Download weights for YOLO
 
-You can download the weight from [here](https://drive.google.com/open?id=0B5WIzrIVeL0WS3N2VklTVmstelE) and save it to
+You can download the weight from [here](https://drive.google.com/file/d/0B5WIzrIVeL0WS3N2VklTVmstelE/view?usp=sharing&resourcekey=0-QkNPlJWkA9QsD6dHAmHXRw) and save it to
 the [weights](weights) folder.
 
 (2) If you want to run the demo, you can simply run:
