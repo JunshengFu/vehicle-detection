@@ -5,6 +5,7 @@ from os import walk
 from os import path
 import time
 from sklearn.svm import LinearSVC
+from sklearn import preprocessing
 from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split
 import pickle
